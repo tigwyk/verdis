@@ -5,7 +5,8 @@ import (
 
 	. "github.com/tendermint/go-common"
 	"github.com/tendermint/go-merkle"
-	"github.com/tigwyk/verdis/types"
+	//"github.com/tigwyk/verdis/types"
+	"github.com/tendermint/tmsp/types"
 )
 
 type DummyApplication struct {
