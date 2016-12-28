@@ -5,15 +5,16 @@ import (
 	"net"
 	"strings"
 
-	"github.com/tendermint/go-common"
-	"github.com/tendermint/tmsp/types"
+	. "github.com/tendermint/go-common"
+	"github.com/tigwyk/verdis/app"
+	"github.com/tigwyk/verdis/types"
 	"google.golang.org/grpc"
 )
 
 // var maxNumberConnections = 2
 
 type GRPCServer struct {
-	common.QuitService
+	QuitService
 
 	proto    string
 	addr     string
@@ -23,7 +24,7 @@ type GRPCServer struct {
 	app types.TMSPApplicationServer
 }
 
-func NewGRPCServer(protoAddr string, app types.TMSPApplicationServer) (common.Service, error) {
+func NewGRPCServer(protoAddr string, app types.TMSPApplicationServer) (Service, error) {
 	parts := strings.SplitN(protoAddr, "://", 2)
 	proto, addr := parts[0], parts[1]
 	s := &GRPCServer{
@@ -32,7 +33,7 @@ func NewGRPCServer(protoAddr string, app types.TMSPApplicationServer) (common.Se
 		listener: nil,
 		app:      app,
 	}
-	s.QuitService = *common.NewQuitService(nil, "TMSPServer", s)
+	s.QuitService = *NewQuitService(nil, "TMSPServer", s)
 	_, err := s.Start() // Just start it
 	return s, err
 }
@@ -57,4 +58,6 @@ func (s *GRPCServer) OnStop() {
 
 func main() {
 	fmt.Println("vim-go")
+	app := app.NewDummyApplication()
+	server := NewGRPCServer("http://127.0.0.1", app)
 }
