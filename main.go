@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	. "github.com/tendermint/go-common"
 	"github.com/tendermint/tmsp/server"
 	"github.com/tigwyk/verdis/app"
@@ -16,5 +17,5 @@ func main() {
 	// Wait forever
 	TrapSignal(func() {
 		// Cleanup
-	}
+	})
 }
