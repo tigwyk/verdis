@@ -10,7 +10,7 @@ import (
 
 func main() {
 	fmt.Println("test")
-	_, err := server.NewServer("tcp://0.0.0.0:46658", "grpc", app.NewDummyApplication())
+	_, err := server.NewServer("tcp://0.0.0.0:46658", "socket", app.NewDummyApplication())
 	if err != nil {
 		panic(err)
 	}
